@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <title>Blog</title>
-        
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet"
-        
-    </head>
-    <body class="antialiased">
+<x-app-layout>
+    <x-slot name="header">
         <h1>Blog Name</h1>
+    </x-slot>
+    <x-slot name="slot">
         <a href='/posts/create'>create</a>
         <div class='posts'>
             @foreach ($posts as $post)
@@ -20,6 +13,17 @@
                         @csrf
                         @method("DELETE")
                     <button type="button" onclick="deletePost({{ $post->id}})">delete</button>
+                </div>
+                <br>
+            @endforeach
+        </div>
+                    {{ Auth::user()->name }}
+        <div>
+            @foreach($questions as $question)
+                <div>
+                    <a href="https://teratail.com/questions/{{ $question['id'] }}">
+                        {{ $question['title'] }}
+                    </a>
                 </div>
             @endforeach
         </div>
@@ -35,5 +39,5 @@
                 }
             }
         </script>
-    </body>
-</html>
+    </x-slot>
+</x-app-layout>
